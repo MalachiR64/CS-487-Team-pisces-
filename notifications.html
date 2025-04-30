@@ -33,13 +33,19 @@
         </div>
         <div class="watch-content">
             
-            <div class="watch-content">
+            <div id="notifications-list" class="notifications-list">
+                <div class="empty-state">No notifications yet</div>
+            </div>
+            <button id="clear-all" class="clear-all-btn">Clear All</button>
+        </div>
+            
                 
             </div>
         </div>
     </div>
     <div class="state-buttons">
         <button>Fall Detection</button>
+        <button>Health Anomaly Detection</button>
         <button>Notification</button>
         <button>Calendar Reminder</button>
         <button>Medication Reminder</button>
@@ -48,6 +54,9 @@
     <div class="phone-screen">
         <div class="time" id="phone-time">--:--</div>
         <div class="status">Battery: 85%</div>
+        <label for="phone-message-label">message</label>
+        <input type="text" id="phone-message-input" placeholder="Type your message here...">
+        <button id="send-message">Send</button>
     </div>
     <script src="main.js"></script>
 </body>
