@@ -211,7 +211,7 @@ function createNotificationElement(container, content, type) {
                 notification.remove();
                 // Only send alert to phone when "Need Help" is clicked
                 if (phoneContainer) {
-                    createNotificationElement(phoneContainer, 'ALERT: Fall detected! Help requested!', type);
+                    createNotificationElement(phoneContainer, 'ALERT: John Smith has fallen Help requested!', type);
                 }
             });
         }
