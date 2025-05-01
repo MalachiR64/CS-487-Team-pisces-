@@ -63,7 +63,35 @@ function loadChats() {
 function saveChats() {
     localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
 }
+function addRandomEventDots() {
+    const days = document.querySelectorAll('.calendar-grid .day:not(.blank)');
+    const eventTypes = ['medication', 'calendar', 'message'];
+    
+    days.forEach(day => {
+        // Clear any existing dots
+        const existingDots = day.querySelector('.event-dots');
+        if (existingDots) {
+            existingDots.remove();
+        }
 
+        // Randomly decide if this day should have events
+        if (Math.random() < 0.3) { // 30% chance of having events
+            const dotsContainer = document.createElement('div');
+            dotsContainer.className = 'event-dots';
+            
+            // Randomly add 1-3 dots
+            const numDots = Math.floor(Math.random() * 3) + 1;
+            
+            for (let i = 0; i < numDots; i++) {
+                const dot = document.createElement('div');
+                dot.className = `event-dot ${eventTypes[Math.floor(Math.random() * eventTypes.length)]}`;
+                dotsContainer.appendChild(dot);
+            }
+            
+            day.appendChild(dotsContainer);
+        }
+    });
+}
 function renderChatList() {
     const container = document.getElementById('chat-list');
     if (!container) return;
@@ -425,5 +453,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 messageInput.value = ''; // Clear input after sending
             }
         });
+    }
+
+    if (document.querySelector('.calendar-grid')) {
+        addRandomEventDots();
+    }
+    
+    // Add event handlers for month navigation buttons
+    const prevMonthBtn = document.getElementById('prev-month');
+    const nextMonthBtn = document.getElementById('next-month');
+    
+    if (prevMonthBtn) {
+        prevMonthBtn.addEventListener('click', addRandomEventDots);
+    }
+    if (nextMonthBtn) {
+        nextMonthBtn.addEventListener('click', addRandomEventDots);
     }
 });

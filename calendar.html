@@ -8,33 +8,89 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="watch-screen">
-        <div class="watch-header">
-            <div class="hamburger-menu" id="watch-hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+    <div class="watch-container">
+        <div class="screen-label">Wearable Screen</div>
+        <div class="watch-screen">
+            <div class="watch-header">
+                <div class="hamburger-menu" id="watch-hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <h1 class="watch-title">calendar</h1>
+                <div class="time" id="watch-time">--:--</div>
             </div>
-            <h1 class="watch-title">calendar</h1>
-            <div class="time" id="watch-time">--:--</div>
-        </div>
-        <div class="watch-nav" id="watch-nav">
-            <ul>
-                <li><a href="index.html" class="nav-item">Vitals</a></li>
-                <li><a href="notifications.html" class="nav-item">Notifications</a></li>
-                <li><a href="messages.html" class="nav-item">Messages</a></li>
-                <li><a href="medication.html" class="nav-item">Medication</a></li>
-                <li><a href="calendar.html" class="nav-item">Calendar</a></li>
-                <li><a href="#" class="nav-item"></a></li>
-                <li><a href="#" class="nav-item"></a></li>
-                <li><a  class="nav-item">Settings</a></li>
-                <li><a  class="nav-item">Account</a></li>
-            </ul>
-        </div>
-        <div class="watch-content">
-            
+            <div class="watch-nav" id="watch-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-item">Vitals</a></li>
+                    <li><a href="notifications.html" class="nav-item">Notifications</a></li>
+                    <li><a href="messages.html" class="nav-item">Messages</a></li>
+                    <li><a href="medication.html" class="nav-item">Medication</a></li>
+                    <li><a href="calendar.html" class="nav-item">Calendar</a></li>
+                    <li><a href="#" class="nav-item"></a></li>
+                    <li><a href="#" class="nav-item"></a></li>
+                    <li><a  class="nav-item">Settings</a></li>
+                    <li><a  class="nav-item">Account</a></li>
+                </ul>
+            </div>
             <div class="watch-content">
-                
+                <div class="calendar-month-view">
+                    <div class="calendar-header">
+                    <button class="nav-btn" id="prev-month" >&lt;</button>
+                    <h2 onclick="location.href='calendarYearView.html'">April 2025</h2>
+                    <button class="nav-btn" id="next-month">&gt;</button>
+                    </div>
+                    <div class="calendar-grid">
+                    <!-- Optionally: weekday headers -->
+                    <div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div>
+                    <div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div>
+                    <div class="weekday">Sat</div>
+                    <div class="day blank"></div>
+                    <div class="day blank"></div>
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    
+                    <!-- Week 2 -->
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    
+                    <!-- Week 3 -->
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    
+                    <!-- Week 4 -->
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    
+                    <!-- Week 5 -->
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+                    <div class="day blank"></div>
+                    <div class="day blank"></div>
+                    <div class="day blank"></div>
+                    <!-- fill trailing blanks if you want a full grid -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -45,12 +101,15 @@
         <button>Calendar Reminder</button>
         <button>Medication Reminder</button>
     </div>
-    <div class="phone-screen">
-        <div class="time" id="phone-time">--:--</div>
-        <div class="status">Battery: 85%</div>
-        <label for="phone-message-label">message</label>
-        <input type="text" id="phone-message-input" placeholder="Type your message here...">
-        <button id="send-message">Send</button>
+    <div class="phone-container">
+        <div class="screen-label">Emergency Contact's Phone</div>
+        <div class="phone-screen">
+            <div class="time" id="phone-time">--:--</div>
+            <div class="status">Battery: 85%</div>
+            <label for="phone-message-label">message</label>
+            <input type="text" id="phone-message-input" placeholder="Type your message here...">
+            <button id="send-message">Send</button>
+        </div>
     </div>
     <script src="main.js"></script>
 </body>

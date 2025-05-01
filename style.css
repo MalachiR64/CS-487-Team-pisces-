@@ -8,9 +8,28 @@ body {
     height: 100vh;
     width: 100vw;
     font-family: sans-serif;
-    padding: 0 100px;
+    padding: 0 50px;
     overflow: hidden;
     position: fixed;
+}
+
+/* Screen Labels */
+.screen-label {
+    position: absolute;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    top: -50px;
+}
+
+/* Watch Screen Container */
+.watch-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .watch-screen {
@@ -28,18 +47,16 @@ body {
     transition: transform 0.1s ease;
 }
 
-/* Vibration animation */
-.watch-screen.vibrate {
-    animation: vibrate 0.3s linear infinite;
+/* Phone Screen Container */
+.phone-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 120px;
 }
 
-@keyframes vibrate {
-    0% { transform: translate(0); }
-    25% { transform: translate(2px, 2px); }
-    50% { transform: translate(0); }
-    75% { transform: translate(-2px, -2px); }
-    100% { transform: translate(0); }
-}
+
 
 .watch-header {
     display: flex;
@@ -148,10 +165,8 @@ body {
 }
 
 .phone-screen {
-    position: fixed;
-    right: 100px;
-    width: 45vh;
-    height: 85vh;
+    width: 40vh;
+    height: 80vh;
     background-color: white;
     border-radius: 45px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
@@ -161,7 +176,16 @@ body {
     padding: 20px;
     color: black;
 }
-
+@media (max-width: 1200px) {
+    body {
+        padding: 0 20px;
+    }
+    
+    .phone-screen {
+        width: 35vh;
+        height: 75vh;
+    }
+}
 .phone-header {
     text-align: center;
     margin-bottom: 30px;
@@ -234,6 +258,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    z-index: 10;
 }
 
 .state-buttons button {
@@ -584,8 +609,6 @@ body {
     background-color: #ecffed;
 }
 
-
-
 /* Chat List Styling */
 .chat-list {
     flex: 1;
@@ -625,7 +648,6 @@ body {
     text-overflow: ellipsis;
 }
 
-
 .med-list {
     flex: 1;
     overflow-y: auto;
@@ -633,21 +655,123 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
+}
   
-  .med-card {
+.med-card {
     background: #e0e0e0;
     border-radius: 12px;
     padding: 12px;
-  }
+}
   
-  .med-card-header {
+.med-card-header {
     font-weight: bold;
     font-size: 1.1em;
     margin-bottom: 4px;
-  }
+}
   
-  .med-card-details {
+.med-card-details {
     font-size: 0.9em;
     color: #333;
-  }
+}
+
+/* ==== Calendar: Month View ==== */
+.calendar-month-view {
+    padding: 10px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.calendar-header h2 {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 50px;
+    gap: 4px;
+}
+
+.calendar-grid .weekday {
+    font-weight: bold;
+    text-align: center;
+}
+
+.calendar-grid .day {
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 4px;
+    position: relative;
+}
+
+.event-dots {
+    display: flex;
+    gap: 3px;
+    position: absolute;
+    bottom: 2px;
+}
+
+.event-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+}
+
+.event-dot.medication {
+    background-color: #9C27B0;
+}
+
+.event-dot.calendar {
+    background-color: #2196f3;
+}
+
+.event-dot.message {
+    background-color: #4caf50;
+}
+
+.calendar-grid .blank {
+    background: #f9f9f9;
+}
+  
+/* ==== Calendar: Year View ==== */
+.calendar-year-view {
+    padding: 10px;
+}
+
+.year-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: auto;
+    gap: 8px;
+}
+
+.month-btn {
+    padding: 15px;
+    background: #eee;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background 0.2s;
+    min-height: 60px;
+}
+
+.month-btn:hover {
+    background: #ddd;
+}

@@ -8,35 +8,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="watch-screen">
-        <div class="watch-header">
-            <div class="hamburger-menu" id="watch-hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+    <div class="watch-container">
+        <div class="screen-label">Wearable Screen</div>
+        <div class="watch-screen">
+            <div class="watch-header">
+                <div class="hamburger-menu" id="watch-hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <h1 class="watch-title">messages</h1>
+                <div class="time" id="watch-time">--:--</div>
+                <!-- have the people with messages -->
+                
             </div>
-            <h1 class="watch-title">messages</h1>
-            <div class="time" id="watch-time">--:--</div>
-            <!-- have the people with messages -->
-            
+            <div class="watch-nav" id="watch-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-item">Vitals</a></li>
+                    <li><a href="notifications.html" class="nav-item">Notifications</a></li>
+                    <li><a href="messages.html" class="nav-item">Messages</a></li>
+                    <li><a href="medication.html" class="nav-item">Medication</a></li>
+                    <li><a href="calendar.html" class="nav-item">Calendar</a></li>
+                    <li><a href="#" class="nav-item"></a></li>
+                    <li><a href="#" class="nav-item"></a></li>
+                    <li><a  class="nav-item">Settings</a></li>
+                    <li><a  class="nav-item">Account</a></li>
+                </ul>
+            </div>
+            <div class="watch-content">
+                <div id="chat-list" class="chat-list"></div>
+
+            </div>
+        
         </div>
-        <div class="watch-nav" id="watch-nav">
-            <ul>
-                <li><a href="index.html" class="nav-item">Vitals</a></li>
-                <li><a href="notifications.html" class="nav-item">Notifications</a></li>
-                <li><a href="messages.html" class="nav-item">Messages</a></li>
-                <li><a href="medication.html" class="nav-item">Medication</a></li>
-                <li><a href="calendar.html" class="nav-item">Calendar</a></li>
-                <li><a href="#" class="nav-item"></a></li>
-                <li><a href="#" class="nav-item"></a></li>
-                <li><a  class="nav-item">Settings</a></li>
-                <li><a  class="nav-item">Account</a></li>
-            </ul>
-        </div>
-        <div class="watch-content">
-            <div id="chat-list" class="chat-list">
-        </div>
-    
     </div>
     <div class="state-buttons">
         <button>Fall Detection</button>
@@ -45,12 +49,15 @@
         <button>Calendar Reminder</button>
         <button>Medication Reminder</button>
     </div>
-    <div class="phone-screen">
-        <div class="time" id="phone-time">--:--</div>
-        <div class="status">Battery: 85%</div>
-        <label for="phone-message-label">message</label>
-        <input type="text" id="phone-message-input" placeholder="Type your message here...">
-        <button id="send-message">Send</button>
+    <div class="phone-container">
+        <div class="screen-label">Emergency Contact's Phone</div>
+        <div class="phone-screen">
+            <div class="time" id="phone-time">--:--</div>
+            <div class="status">Battery: 85%</div>
+            <label for="phone-message-label">message</label>
+            <input type="text" id="phone-message-input" placeholder="Type your message here...">
+            <button id="send-message">Send</button>
+        </div>
     </div>
     <script src="main.js"></script>
 </body>
