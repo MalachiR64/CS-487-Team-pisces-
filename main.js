@@ -1,6 +1,89 @@
 // Store notifications in localStorage
 let notificationsHistory = [];
 
+// Chat history (persisted in localStorage)
+let chatHistory = [];
+
+// Medication history (persisted in localStorage)
+let medicationHistory = [];
+
+function loadMedications() {
+    const stored = localStorage.getItem('medicationHistory');
+    if (stored) {
+        medicationHistory = JSON.parse(stored);
+    } else {
+        // dummy data
+        medicationHistory = [
+            { name: 'Lisinopril', dose: '10 mg tablet', prescriber: 'Dr. Smith', schedule: ['08:00','20:00'] },
+            { name: 'Metformin', dose: '500 mg tablet', prescriber: 'Dr. Lee', schedule: ['07:00','19:00'] },
+            { name: 'Atorvastatin', dose: '20 mg tablet', prescriber: 'Dr. Rosario', schedule: ['22:00'] },
+            { name: 'Albuterol', dose: '2 puffs', prescriber: 'Dr. Gates', schedule: ['as needed'] }
+        ];
+        saveMedications();
+    }
+}
+
+function saveMedications() {
+    localStorage.setItem('medicationHistory', JSON.stringify(medicationHistory));
+}
+
+function renderMedicationList() {
+    const container = document.getElementById('med-list');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    medicationHistory.forEach(med => {
+        const card = document.createElement('div');
+        card.className = 'med-card';
+        card.innerHTML = `
+            <div class="med-card-header">${med.name} — ${med.dose}</div>
+            <div class="med-card-details">Prescribed by ${med.prescriber}</div>
+            <div class="med-card-details">Schedule: ${med.schedule.join(', ')}</div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function loadChats() {
+    const stored = localStorage.getItem('chatHistory');
+    if (stored) {
+        chatHistory = JSON.parse(stored);
+    } else {
+        // first-time dummy data
+        chatHistory = [
+            { name: 'Alice', preview: 'See you tomorrow!', timestamp: '10:15' },
+            { name: 'Bob', preview: 'Thanks for the update.', timestamp: '12:40' },
+            { name: 'Carol', preview: 'Can you call me?', timestamp: '14:05' }
+        ];
+        saveChats();
+    }
+}
+
+function saveChats() {
+    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+}
+
+function renderChatList() {
+    const container = document.getElementById('chat-list');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    chatHistory.forEach(chat => {
+        const item = document.createElement('div');
+        item.className = 'chat-item';
+        item.innerHTML = `
+            <div class="chat-header">
+                <span class="chat-name">${chat.name}</span>
+                <span class="chat-timestamp">${chat.timestamp}</span>
+            </div>
+            <div class="chat-preview">${chat.preview}</div>
+        `;
+        container.appendChild(item);
+    });
+}
+
 // Load existing notifications from localStorage
 function loadNotifications() {
     const storedNotifications = localStorage.getItem('watchNotifications');
@@ -87,13 +170,29 @@ function setupNotificationSystem() {
                 case 'Notification':
                     notificationContent = 'New message from John: "Hey, how are you?"';
                     notificationType = 'message';
+                    
+                    // Also add to chat history
+                    const now = new Date();
+                    const nowStr = formatTime(now);
+                    chatHistory.unshift({ 
+                        name: 'John', 
+                        preview: 'Hey, how are you?', 
+                        timestamp: nowStr 
+                    });
+                    saveChats();
+                    renderChatList();
                     break;
                 case 'Calendar Reminder':
                     notificationContent = 'Meeting with Dr. Smith in 15 minutes';
                     notificationType = 'calendar';
                     break;
                 case 'Medication Reminder':
-                    notificationContent = 'Time to take your medication';
+                    const nextMed = medicationHistory[0];
+                    if (nextMed) {
+                        notificationContent = `Time to take ${nextMed.name} (${nextMed.dose}). Prescribed by ${nextMed.prescriber}.`;
+                    } else {
+                        notificationContent = 'Time to take your medication';
+                    }
                     notificationType = 'medication';
                     break;
             }
@@ -124,7 +223,7 @@ function showNotification(content, type) {
         const phoneContainer = document.querySelector('.phone-notification-container');
         if (phoneContainer) {
             const phoneContent = type === 'health-emergency' ? 
-                'ALERT: John Smith is having an irregular health anomaly!' : 
+                'ALERT: Your father is having an irregular health anomaly!' : 
                 content;
             createNotificationElement(phoneContainer, phoneContent, type);
         }
@@ -211,7 +310,7 @@ function createNotificationElement(container, content, type) {
                 notification.remove();
                 // Only send alert to phone when "Need Help" is clicked
                 if (phoneContainer) {
-                    createNotificationElement(phoneContainer, 'ALERT: John Smith has fallen Help requested!', type);
+                    createNotificationElement(phoneContainer, 'ALERT: Your father has fallen Help requested!', type);
                 }
             });
         }
@@ -292,9 +391,13 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateTime, 1000);
     updateTime(); // initial call
     loadNotifications(); // Load saved notifications
+    loadChats(); // Load saved chats
+    loadMedications(); // Load saved medications
     setupHamburgerMenu();
     setupNotificationSystem();
     renderNotificationsList(); // Render notifications if we're on that page
+    renderChatList(); // Render chat list if we're on messages page
+    renderMedicationList(); // Render medication list if we're on medication page
 
     // Add send message handler
     const sendButton = document.getElementById('send-message');
@@ -304,7 +407,21 @@ document.addEventListener('DOMContentLoaded', function() {
         sendButton.addEventListener('click', function() {
             const message = messageInput.value.trim();
             if (message) {
-                showNotification(`New message: "${message}"`, 'message');
+                // 1) Show notification
+                showNotification(`New message from My son: "${message}"`, 'message');
+                
+                // 2) Update chat list
+                const now = new Date();
+                const nowStr = formatTime(now);
+                chatHistory.unshift({ 
+                    name: 'My son', 
+                    preview: message, 
+                    timestamp: nowStr 
+                });
+                saveChats();
+                renderChatList();
+                
+                // 3) Clear input
                 messageInput.value = ''; // Clear input after sending
             }
         });

@@ -501,3 +501,153 @@ body {
 .clear-all-btn:hover {
     background-color: #666;
 }
+
+/* Vital Cards Styling */
+.vital-cards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+}
+
+.vital-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vital-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.vital-icon {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+}
+
+.vital-icon img {
+    height: 100%;
+    max-width: 40px;
+    object-fit: contain;
+}
+
+.vital-info {
+    text-align: center;
+    width: 100%;
+}
+
+.vital-name {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.vital-value {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #333;
+}
+
+.vital-unit {
+    font-size: 0.7em;
+    font-weight: normal;
+    opacity: 0.7;
+}
+
+/* Specific styling for different vital cards */
+.vital-card.heart-rate {
+    background-color: #ffecec;
+}
+
+.vital-card.blood-oxygen {
+    background-color: #ecf6ff;
+}
+
+.vital-card.blood-pressure {
+    background-color: #fff6ec;
+}
+
+.vital-card.steps {
+    background-color: #ecffed;
+}
+
+
+
+/* Chat List Styling */
+.chat-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.chat-item {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.chat-item:hover {
+    background-color: #f5f5f5;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85em;
+    color: #555;
+}
+
+.chat-name {
+    font-weight: bold;
+}
+
+.chat-preview {
+    margin-top: 4px;
+    font-size: 1em;
+    color: #222;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.med-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .med-card {
+    background: #e0e0e0;
+    border-radius: 12px;
+    padding: 12px;
+  }
+  
+  .med-card-header {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 4px;
+  }
+  
+  .med-card-details {
+    font-size: 0.9em;
+    color: #333;
+  }
